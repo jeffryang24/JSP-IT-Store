@@ -18,7 +18,7 @@
 			<ul class="nav navbar-nav">
 				<%
             	String _userRole = (String)session.getAttribute("BJ_USER_ROLE");
-        		Statement stmt = conn.createStatement();
+        		Statement stmt = conn.createStatement(1004,1008);
         		String sql = "";
         		if (_userRole == null){		// berarti belum login, masih guest
         			sql = "SELECT BJ_menuName, BJ_menuLink FROM BJ_Menu WHERE BJ_menuRoleID = 3 AND BJ_menuStatus = 1";
