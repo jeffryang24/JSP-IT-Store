@@ -1,4 +1,3 @@
-<%@ page import="java.sql.*,java.math.*" %>
 <%!
 /*  
  * Database Configuration

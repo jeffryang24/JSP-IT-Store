@@ -1,15 +1,11 @@
 <%-- Header --%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.*"%>
-<jsp:include page="pages/system/header.jsp"></jsp:include>
+<%@ include file="pages/system/header.jsp" %>
 <title>BJKomputer</title>
-<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="assets/css/overload.css">
 </head>
 
 <body>
 	<%-- Main Menu --%>
-	<jsp:include page="pages/system/mainmenu.jsp"></jsp:include>
+	<%@ include file="pages/system/mainmenu.jsp" %>
 	<%-- Content --%>
 	<div class="row" style="margin-top: 60px;">
 		<div class="col-md-3 col-md-offset-1 text-center">
@@ -33,4 +29,4 @@
 		<p class="text-center">We will guarantee your satisfaction here.</p>
 	</div>
 	<%-- Footer --%>
-	<jsp:include page="pages/system/footer.jsp"></jsp:include>
+	<%@ include file="pages/system/footer.jsp" %>

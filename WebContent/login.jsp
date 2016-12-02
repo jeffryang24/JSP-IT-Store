@@ -1,11 +1,9 @@
-<jsp:include page="pages/system/header.jsp"></jsp:include>
+<%@include file="pages/system/header.jsp" %>
 <title>BJKomputer - Login</title>
-<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="assets/css/overload.css">
 </head>
 
 <body>
-    <jsp:include page="pages/system/mainmenu.jsp"></jsp:include>
+    <%@ include file="pages/system/mainmenu.jsp" %>
     <div class="row">
         <div class="col-md-4 col-md-offset-4 bjloginpnl">
             <h3 class="text-center">Login</h3>
@@ -39,4 +37,4 @@
             <div class="alert alert-danger" role="alert">Tes alert.</div>
         </div>
     </div>
-    <jsp:include page="pages/system/footer.jsp"></jsp:include>
+	<%@ include file="pages/system/footer.jsp" %>

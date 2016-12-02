@@ -1,6 +1,3 @@
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.sql.*,java.math.*,java.util.*"%>
-<%@ include file="../../utility/dbcontext.jsp"%>
 <nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid">
 		<!-- Brand and toggle get grouped for better mobile display -->
@@ -12,7 +9,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">BJKomputer</a>
+			<a class="navbar-brand" href="index.jsp">BJKomputer</a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
