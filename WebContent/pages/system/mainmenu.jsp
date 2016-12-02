@@ -1,4 +1,5 @@
-<%@page import="java.sql.*,java.math.*"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.sql.*,java.math.*,java.util.*"%>
 <%@ include file="../../config/global.jsp" %>
 <%@ include file="../../utility/dbcontext.jsp" %>
 <nav class="navbar navbar-default">
@@ -62,3 +63,18 @@
     </div>
     <!-- /.container-fluid -->
 </nav>
+<div class="container-fluid">
+	<div class="row">
+		<%
+		String user = (String)session.getAttribute("BJ_USERNAME");
+		java.util.Date dt = new java.util.Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("E, dd MMMM yyyy");
+		if (user == null){
+			out.print("<p class='text-right' style='margin-right: 20px;'>Hello, Guys</p>");
+			out.print("<p class='text-right' style='margin-right: 20px;'>" + sdf.format(dt) + "</p>");
+		}else{
+			out.print("<p class='text-right' style='margin-right: 20px;'>Hello, " + user + "</p>");
+			out.print("<p class='text-right' style='margin-right: 20px;'>" + sdf.format(dt) + "</p>");
+		}
+		%>
+	</div>
