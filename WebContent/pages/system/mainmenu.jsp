@@ -17,12 +17,12 @@
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<%
-            	String _userRole = (String)session.getAttribute("BJ_USER_ROLE");
+            	int _userRole = session.getAttribute("BJ_USERROLE") == null ? -1 : (Integer)session.getAttribute("BJ_USERROLE");
         		Statement stmt = conn.createStatement(1004,1008);
         		String sql = "";
-        		if (_userRole == null){		// berarti belum register, masih guest
+        		if (_userRole == -1){		// berarti belum register, masih guest
         			sql = "SELECT BJ_menuName, BJ_menuLink FROM BJ_Menu WHERE BJ_menuRoleID = 3 AND BJ_menuStatus = 1";
-        		}else if (_userRole.equalsIgnoreCase("admin")){
+        		}else if (_userRole == 1){
         			sql = "SELECT BJ_menuName, BJ_menuLink FROM BJ_Menu WHERE BJ_menuRoleID = 1 AND BJ_menuStatus = 1";
         		}else{
         			sql = "SELECT BJ_menuName, BJ_menuLink FROM BJ_Menu WHERE BJ_menuRoleID = 2 AND BJ_menuStatus = 1";
