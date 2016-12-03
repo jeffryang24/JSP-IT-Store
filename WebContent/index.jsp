@@ -7,7 +7,7 @@
 	<%-- Main Menu --%>
 	<%@ include file="pages/system/mainmenu.jsp" %>
 	<%-- Content --%>
-	<div class="row" style="margin-top: 60px;">
+	<div class="row" style="margin-top: 50px;">
 		<div class="col-md-3 col-md-offset-1 text-center">
 			<img src="assets/images/gtx1080.png"
 				class="img-responsive img-rounded" alt="gtx_1080" width="300">

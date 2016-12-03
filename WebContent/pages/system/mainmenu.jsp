@@ -20,7 +20,7 @@
             	String _userRole = (String)session.getAttribute("BJ_USER_ROLE");
         		Statement stmt = conn.createStatement(1004,1008);
         		String sql = "";
-        		if (_userRole == null){		// berarti belum login, masih guest
+        		if (_userRole == null){		// berarti belum register, masih guest
         			sql = "SELECT BJ_menuName, BJ_menuLink FROM BJ_Menu WHERE BJ_menuRoleID = 3 AND BJ_menuStatus = 1";
         		}else if (_userRole.equalsIgnoreCase("admin")){
         			sql = "SELECT BJ_menuName, BJ_menuLink FROM BJ_Menu WHERE BJ_menuRoleID = 1 AND BJ_menuStatus = 1";
@@ -33,7 +33,7 @@
         		while(rsMenu.next()){
         			String pageName = rsMenu.getString("BJ_menuName");
         			String pageLink = rsMenu.getString("BJ_menuLink");
-        			String template = "<li><a href='" + pageLink + "'>" + pageName + "</a></li>";
+        			String template = "<li><a href='" + application.getContextPath() + "/" + pageLink + "'>" + pageName + "</a></li>";
         			out.print(template);
         		}
         		
@@ -44,17 +44,15 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<%
-            	String userid = (String)session.getAttribute("BJ_USERID");
-            	if (userid == null){
+            	String userName = (String)session.getAttribute("BJ_USERNAME");
+            	if (userName == null){
             		out.print("<li><a href='login.jsp'>Login</a></li>");
             		out.print("<li><a href='register.jsp'>Register</a></li>");
             	}else{
-            		out.print("<li>Welcome, User</li>");
-            		out.print("<li><a href='logout.jsp'>Logout</a></li>");
+            		out.print("<li style='padding-bottom: 15px; padding-top: 15px;'>Welcome, " + userName + "</li>");
+            		out.print("<li><a href='" + application.getContextPath() + "/logout.jsp'>Logout</a></li>");
             	}
             	%>
-				<%--<li><a href="#">Login</a></li>
-                <li><a href="#">Register</a></li>--%>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->
@@ -64,15 +62,22 @@
 <div class="container-fluid">
 	<div class="row">
 		<%
-		String user = (String)session.getAttribute("BJ_USERNAME");
+		String userFullName = (String)session.getAttribute("BJ_USERFULLNAME");
 		java.util.Date dt = new java.util.Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("E, dd MMMM yyyy");
-		if (user == null){
-			out.print("<p class='text-right' style='margin-right: 20px;'>Hello, Guys</p>");
+		if (userFullName == null){
+			out.print("<p class='text-right' style='margin-top: 70px; margin-right: 20px; margin-bottom: 3px;'>Hello, Guys</p>");
 			out.print("<p class='text-right' style='margin-right: 20px;'>" + sdf.format(dt) + "</p>");
 		}else{
-			out.print("<p class='text-right' style='margin-right: 20px;'>Hello, " + user + "</p>");
+			int onlineUser = (Integer)application.getAttribute("appBJ_USERONLINE");
+			String firstName = "";
+			if (userFullName.indexOf(' ') == -1) firstName = userFullName;
+			else{
+				firstName = userFullName.substring(0, userFullName.indexOf(' '));
+			}
+			out.print("<p class='text-right' style='margin-top: 70px; margin-right: 20px; margin-bottom: 3px;'>Hello, " + firstName + "</p>");
 			out.print("<p class='text-right' style='margin-right: 20px;'>" + sdf.format(dt) + "</p>");
+			out.print("<p class='text-right' style='margin-right: 20px;'>User Online: " + onlineUser + "</p>");
 		}
 		%>
 	</div>
