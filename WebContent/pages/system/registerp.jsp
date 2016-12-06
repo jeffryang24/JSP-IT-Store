@@ -38,8 +38,8 @@ if (!isAlphaNumeric(password1) || !isAlphaNumeric(password2)){
 	return;
 }
 
-if (password1.length() < 5 || password2.length() < 5){
-	response.sendRedirect(application.getContextPath() + "/register.jsp?e=Password+minimum+5+characters!");
+if (password1.length() < 8 || password2.length() < 8){
+	response.sendRedirect(application.getContextPath() + "/register.jsp?e=Password+minimum+8+characters!");
 	return;
 }
 
@@ -97,7 +97,7 @@ if (email.trim().equalsIgnoreCase("")){
 	return;
 }
 if (!isValidEmail(email)){
-	response.sendRedirect(application.getContextPath() + "/register.jsp?e=Email+address+must+be+valid!");
+	response.sendRedirect(application.getContextPath() + "/register.jsp?e=Email+address+must+be+valid+(only+accept+.com)!");
 	return;
 }
 
@@ -123,18 +123,7 @@ if (rs.isBeforeFirst()){
 	// set cursor to first position
 	rs.next();
 	// brarti ada data
-	String userID = rs.getString("BJ_userID");
-	// get id number
-	String[] userID_split = userID.split("US");
-	int lastID = Integer.parseInt(userID_split[1]);
-	
-	// new ID
-	int newID = lastID + 1;
-	String strID = "";
-	
-	if (newID > 9) strID = "US0" + newID;
-	else if (newID > 99) strID = "US" + newID;
-	else strID = "US00" + newID;
+	String strID = String.format("US%03d", Integer.parseInt(rs.getString("BJ_userID").split("US")[1]) + 1);
 	
 	Date dt = new Date();
 	SimpleDateFormat curDt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
