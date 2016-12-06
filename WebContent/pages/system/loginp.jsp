@@ -15,7 +15,6 @@ if (password.trim().equalsIgnoreCase("")){
 	return;
 }
 
-Statement stmt = conn.createStatement(1004,1008);
 ResultSet rs = null;
 String sql = "";
 
@@ -44,17 +43,18 @@ if (rs.isBeforeFirst()){
 	
 	// jika remember dicentang, maka
 	// buat cookie satu jam untuk username dan password itu
-	
-	Cookie ckUsername = new Cookie("ckBJ_USERNAME", username.trim());
-	Cookie ckPassword = new Cookie("ckBJ_PASSWORD", password);
-	
-	ckUsername.setMaxAge(60 * 60);	// 3600 sec = 1 hour
-	ckPassword.setMaxAge(60 * 60);
-	ckUsername.setPath(application.getContextPath());
-	ckPassword.setPath(application.getContextPath());
-	
-	response.addCookie(ckUsername);
-	response.addCookie(ckPassword);
+	if (chkRemember != null && chkRemember.equalsIgnoreCase("on")){
+		Cookie ckUsername = new Cookie("ckBJ_USERNAME", username.trim());
+		Cookie ckPassword = new Cookie("ckBJ_PASSWORD", password);
+		
+		ckUsername.setMaxAge(60 * 60);	// 3600 sec = 1 hour
+		ckPassword.setMaxAge(60 * 60);
+		ckUsername.setPath(application.getContextPath());
+		ckPassword.setPath(application.getContextPath());
+		
+		response.addCookie(ckUsername);
+		response.addCookie(ckPassword);	
+	}
 	
 	response.sendRedirect(application.getContextPath() + "/index.jsp");
 }else{

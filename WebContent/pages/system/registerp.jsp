@@ -1,5 +1,4 @@
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat,java.util.Date"%>
 <%@ include file="/utility/dbcontext.jsp" %>
 <%@ include file="/utility/helper.jsp"%>
 <%
@@ -103,7 +102,6 @@ if (!isValidEmail(email)){
 
 // processing request
 // check current username is registered or not?
-Statement stmt = conn.createStatement(1004,1008);
 String sql = "";
 ResultSet rs = null;
 

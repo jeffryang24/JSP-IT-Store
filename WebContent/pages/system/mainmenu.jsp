@@ -9,7 +9,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="index.jsp">BJKomputer</a>
+			<a class="navbar-brand" href="<%= application.getContextPath() %>/index.jsp">BJKomputer</a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
@@ -17,10 +17,9 @@
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<%
-            	int _userRole = session.getAttribute("BJ_USERROLE") == null ? -1 : (Integer)session.getAttribute("BJ_USERROLE");
-        		Statement stmt = conn.createStatement(1004,1008);
+            	int _userRole = session.getAttribute("BJ_USERROLE") == null ? 3 : (Integer)session.getAttribute("BJ_USERROLE");
         		String sql = "";
-        		if (_userRole == -1){		// berarti belum register, masih guest
+        		if (_userRole == 3){		// berarti belum register, masih guest
         			sql = "SELECT BJ_menuName, BJ_menuLink FROM BJ_Menu WHERE BJ_menuRoleID = 3 AND BJ_menuStatus = 1";
         		}else if (_userRole == 1){
         			sql = "SELECT BJ_menuName, BJ_menuLink FROM BJ_Menu WHERE BJ_menuRoleID = 1 AND BJ_menuStatus = 1";
@@ -46,8 +45,8 @@
 				<%
             	String userName = (String)session.getAttribute("BJ_USERNAME");
             	if (userName == null){
-            		out.print("<li><a href='login.jsp'>Login</a></li>");
-            		out.print("<li><a href='register.jsp'>Register</a></li>");
+            		out.print("<li><a href='" + application.getContextPath() + "/login.jsp'>Login</a></li>");
+            		out.print("<li><a href='" + application.getContextPath() + "/register.jsp'>Register</a></li>");
             	}else{
             		out.print("<li style='padding-bottom: 15px; padding-top: 15px;'>Welcome, " + userName + "</li>");
             		out.print("<li><a href='" + application.getContextPath() + "/logout.jsp'>Logout</a></li>");
