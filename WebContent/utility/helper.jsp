@@ -35,7 +35,8 @@ boolean isFullnameValid(String strIn){
 }
 
 boolean isValidEmail(String emailIn){
-	Pattern emailPtn = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+	/* Pattern emailPtn = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"); */
+	Pattern emailPtn = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.com)$");
 	Matcher emailMatch = emailPtn.matcher(emailIn);
 	return emailMatch.matches();
 }
