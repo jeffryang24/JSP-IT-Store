@@ -141,6 +141,13 @@
 				%>
 			</ul>
 		</nav>
+		<%
+		if (_userRole == 1){
+		%>
+		<p class="text-center"><a href="<%= application.getContextPath() + "/pages/add_product.jsp" %>" class="btn btn-default" role="button">Add Product</a></p>
+		<%
+		}
+		%>
 	</div>
 	<%-- Footer --%>
 	<%@ include file="system/footer.jsp"%>

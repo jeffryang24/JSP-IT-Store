@@ -21,6 +21,12 @@ img
 <body>
 	<%-- Main Menu --%>
 	<%@ include file="system/mainmenu.jsp" %>
+	<%
+	String _userID = "";
+	if (_userRole == 1 || _userRole == 2){
+		_userID = (String)session.getAttribute("BJ_USERID");
+	}
+	%>
 	<%-- Content --%>
 	<div class="row">
 	<%
@@ -60,18 +66,39 @@ img
 	
 	<div class="row" style="margin-bottom: 150px; margin-top: 25px;">
 	<%
-	sql = "select b.BJ_userName, a.BJ_reviewDesc from BJ_Review a join BJ_User b " +
-		"on a.BJ_reviewerID = b.BJ_userID and b.BJ_userStatus = 1";
+	if (_userRole != 1){
+		sql = "select b.BJ_userName, a.BJ_reviewDesc from BJ_Review a join BJ_User b " +
+				"on a.BJ_reviewerID = b.BJ_userID and b.BJ_userStatus = 1 " +
+				"where a.BJ_productID = '" + _pID + "' order by a.BJ_reviewID";	
+	}else{
+		sql = "select a.BJ_reviewID, b.BJ_userName, a.BJ_reviewerID, a.BJ_reviewDesc from BJ_Review a join BJ_User b " +
+				"on a.BJ_reviewerID = b.BJ_userID and b.BJ_userStatus = 1 " +
+				"where a.BJ_productID = '" + _pID + "' order by a.BJ_reviewID";
+	}
 	rs = stmt.executeQuery(sql);
 	%>
 		<div class="col-md-4 col-md-offset-4" style="border: 1px groove black; border-radius: 5px; padding-bottom: 25px;">
 			<h2 class="text-center">Product Review</h2>
 			<%
 			if (rs.isBeforeFirst()){
-				while(rs.next()){
+				if (_userRole != 1){
+					while(rs.next()){	
 			%>
 			<p class="text-left"><label><%= rs.getString("BJ_userName") %>:</label><span style="margin-left: 15px;"><%= rs.getString("BJ_reviewDesc") %></span></p>
 			<%
+					}
+				}else{
+					while(rs.next()){
+			%>
+			<hr>
+			<p class="text-left"><label><%= rs.getString("BJ_userName") %>:</label><span style="margin-left: 15px;"><%= rs.getString("BJ_reviewDesc") %></span></p>
+			<p class="text-center">
+				<a href="<%= application.getContextPath() + "/pages/updateReview.jsp?rid=" + rs.getString("BJ_reviewID") + "&pid=" + _pID + "&uid=" + rs.getString("BJ_reviewerID") %>" class="btn btn-default" role="button" style="margin-right: 5px;">Edit Review</a>
+				<a href="#" onclick="redirectTo('<%= application.getContextPath() + "/pages/deleteReview.jsp?rid=" + rs.getString("BJ_reviewID") + "&pid=" + _pID + "&uid=" + rs.getString("BJ_reviewerID") %>')" class="btn btn-danger" role="button">Delete Review</a>
+			</p>
+			<hr>
+			<%
+					}
 				}
 			}else{
 			%>
@@ -82,18 +109,51 @@ img
 			
 			<%
 			if (_userRole == 2 || _userRole == 1){
+				sql = "SELECT BJ_reviewDesc, BJ_reviewID from BJ_Review where BJ_reviewerID = '" + _userID + "' and BJ_productID = '" + _pID + "'";
+				rs = stmt.executeQuery(sql);
+				
+				if (!rs.isBeforeFirst()){
 			%>
 			<form class="form-inline text-center" method="post" action="system/doReview.jsp">
 				<div class="form-group">
 					<label class="sr-only" for="txtReview">Review</label>
 					<input type="text" class="form-control" id="txtReview" name="inReview" placeholder="Insert review here...">
 				</div>
+				<input type="hidden" name="hidPID" value="<%= _pID %>">
+				<input type="hidden" name="hidUID" value="<%= _userID %>">
 				<button type="submit" class="btn btn-default">Submit</button>
 			</form>	
+			<%
+				}else{
+					rs.next();
+			%>
+			<p class="text-center"><%= rs.getString("BJ_reviewDesc") %></p>
+			<p class="text-center">
+				<a href="<%= application.getContextPath() + "/pages/updateReview.jsp?rid=" + rs.getString("BJ_reviewID") + "&pid=" + _pID %>" class="btn btn-default" role="button" style="margin-right: 5px;">Edit Review</a>
+				<a href="#" onclick="redirectTo('<%= application.getContextPath() + "/pages/deleteReview.jsp?rid=" + rs.getString("BJ_reviewID") + "&pid=" + _pID  %>')" class="btn btn-danger" role="button">Delete Review</a>
+			</p>
+			<%
+					rs.close();
+				}
+			}
+			%>
+			<%
+			String error = (String)request.getParameter("e");
+			if (error != null){
+			%>
+			<div class='alert alert-danger' role='alert'><%= error %></div>
 			<%
 			}
 			%>
 		</div>
 	</div>
+	<script>
+		function redirectTo(link){
+			var askUser = confirm("Are you sure want to delete this review?");
+			if (askUser){
+				document.location = link;
+			}
+		}
+	</script>
 	<%-- Footer --%>
 	<%@ include file="system/footer.jsp" %>
