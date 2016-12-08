@@ -11,8 +11,8 @@ if (_pID == null){
 <style>
 img
 {
-	height: 450px;
-	min-height: 450px;
+	height: 200px;
+	min-height: 200px;
 	width: 100%;
 }
 </style>
@@ -39,7 +39,7 @@ img
 	%>
 		<div class="col-md-4 col-md-offset-4" style="border: 1px groove black; border-radius: 5px; padding-bottom: 25px;">
 			<h2 class="text-center"><%= rs.getString("BJ_productName") %></h2>
-			<img class="text-center" src="<%= application.getContextPath() + "/assets/images/" + rs.getString("BJ_productImage") %>" alt="Image not available">
+			<img class="text-center" src="<%= application.getContextPath() + rs.getString("BJ_productImage") %>" alt="Image not available">
 			<p style="margin-top: 20px;"><span class="text-left">IDR <%= rs.getInt("BJ_productPrice") %></span><span class="text-right" style="margin-left: 60%;">Stock: <%= rs.getInt("BJ_productStock") %></span></p>
 			<hr>
 			<h4 class="text-center">Description</h4>
@@ -51,7 +51,7 @@ img
 			<form class="form-inline text-center" method="post" action="system/doCart.jsp">
 				<div class="form-group">
 					<label class="sr-only" for="inQty">Quantity</label>
-					<input type="number" class="form-control" id="inQty" name="inQty" placeholder="Quantity">
+					<input type="text" class="form-control" id="inQty" name="inQty" placeholder="Quantity">
 				</div>
 				<button type="submit" class="btn btn-primary">Add to Cart</button>
 			</form>

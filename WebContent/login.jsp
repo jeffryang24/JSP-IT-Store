@@ -24,7 +24,7 @@
     <%@ include file="pages/system/mainmenu.jsp" %>
     <div class="row">
         <div class="col-md-4 col-md-offset-4 bjloginpnl">
-            <h3 class="text-center">Login</h3>
+            <h2 class="text-center">Login</h2>
             <form class="form-horizontal" name="frmLogin" id="frmLogin" method="post" action="pages/system/loginp.jsp">
                 <div class="form-group">
                     <label for="txtUsername" class="col-sm-2 control-label">Username</label>

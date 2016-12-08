@@ -14,4 +14,11 @@ int MAX_ITEM_PER_PAGE = 6;
 
 // set default max item per row
 int MAX_ITEM_PER_ROW = MAX_ITEM_PER_PAGE / MAX_ROW_PER_PAGE;
+
+/*
+ * Images Location
+ */
+
+String IMAGES_DEFAULT_LOCATION = "/assets/images/";
+String IMAGES_UPLOAD_LOCATION = "/assets/uploaded_images/";
 %>

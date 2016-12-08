@@ -74,10 +74,10 @@
 			int j = 0;
 			
 			while(rsProduct.next()){
-				if (++j > MAX_ITEM_PER_PAGE) break;
+				if (++j > MAX_ITEM_PER_PAGE) break;		
 				out.print("<div class='col-sm-6 col-md-4'>");	
 				out.print("<div class='thumbnail'>");
-				out.print("<img src='" + application.getContextPath() + "/assets/images/" + rsProduct.getString("BJ_productImage") + "' alt='Images not available' height='300'>");
+				out.print("<img src='" + application.getContextPath() + rsProduct.getString("BJ_productImage") + "' alt='Images not available' height='300'>");
 				out.print("<div class='caption'>");
 				out.print("<h3>" + rsProduct.getString("BJ_productName") + "</h3>");
 				out.print("<p class='text-left'>" + rsProduct.getString("BJ_productDesc") + "</p>");
@@ -86,7 +86,8 @@
 				if (_userRole == 1){
 					out.print("<p><a href='" + application.getContextPath() + "/pages/detail_product.jsp?pid=" + rsProduct.getString("BJ_productID") + "' class='btn btn-primary' role='button'>View</a>");
 					out.print("<a href='" + application.getContextPath() + "/pages/update_product.jsp?pid=" + rsProduct.getString("BJ_productID") + "' class='btn btn-default' role='button'>Update</a>");
-					out.print("<a href='" + application.getContextPath() + "/pages/delete_product.jsp?pid=" + rsProduct.getString("BJ_productID") + "' class='btn btn-danger' role='button'>Delete</a></p>");
+					String deleteLink = "redirectTo('" + application.getContextPath() + "/pages/delete_product.jsp?pid=" + rsProduct.getString("BJ_productID") + "')";
+					out.print("<a href='#' onclick=" + deleteLink + " class='btn btn-danger' role='button'>Delete</a></p>");
 				}else{
 					out.print("<p><a href='" + application.getContextPath() + "/pages/detail_product.jsp?pid=" + rsProduct.getString("BJ_productID") + "' class='btn btn-primary' role='button'>View</a></p>");
 				}
@@ -148,6 +149,31 @@
 		<%
 		}
 		%>
+		<%
+		String error = (String)request.getParameter("e");
+		String msg = (String)request.getParameter("msg");
+		
+		if (error != null){
+		%>
+		<div class="alert alert-danger text-center" role="alert"><%= error %></div>
+		<%
+		}
+		%>
+		<%
+		if (msg != null){
+		%>
+		<div class="alert alert-success text-center" role="alert"><%= msg %></div>
+		<%
+		}
+		%>
 	</div>
+	<script type="text/javascript">
+		function redirectTo(link){
+			var askUser = confirm("Are you sure want to delete this product?");
+			if (askUser){
+				document.location = link;
+			}
+		}
+	</script>
 	<%-- Footer --%>
 	<%@ include file="system/footer.jsp"%>

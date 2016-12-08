@@ -17,7 +17,6 @@
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<%
-            	int _userRole = session.getAttribute("BJ_USERROLE") == null ? 3 : (Integer)session.getAttribute("BJ_USERROLE");
         		String sql = "";
         		if (_userRole == 3){		// berarti belum register, masih guest
         			sql = "SELECT BJ_menuName, BJ_menuLink FROM BJ_Menu WHERE BJ_menuRoleID = 3 AND BJ_menuStatus = 1";

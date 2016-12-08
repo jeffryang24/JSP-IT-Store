@@ -10,7 +10,7 @@
 	<%@ include file="pages/system/mainmenu.jsp"%>
 	<div class="row">
 		<div class="col-md-4 col-md-offset-4 bjloginpnl">
-			<h3 class="text-center">Register</h3>
+			<h2 class="text-center">Register</h2>
 			<form class="form-horizontal" name="frmRegister" id="frmRegister"
 				method="post" action="pages/system/registerp.jsp">
 				<div class="form-group">
