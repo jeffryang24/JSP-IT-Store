@@ -6,7 +6,7 @@ String userID = (String)session.getAttribute("BJ_USERID");
 if (userID != null){
 	session.invalidate();
 	
-	int onlineUser = 0;
+	Integer onlineUser = 0;
 	if (application.getAttribute("appBJ_USERONLINE") == null){
 		application.setAttribute("appBJ_USERONLINE", onlineUser);
 	}else{

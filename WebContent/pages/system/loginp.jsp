@@ -32,7 +32,7 @@ if (rs.isBeforeFirst()){
 	session.setAttribute("BJ_USEREMAIL", rs.getString("BJ_userEmail"));
 	
 	// set user online ditambah satu
-	int onlineUser = 0;
+	Integer onlineUser = 0;
 	if (application.getAttribute("appBJ_USERONLINE") == null){
 		onlineUser = 1;
 		application.setAttribute("appBJ_USERONLINE", onlineUser);
