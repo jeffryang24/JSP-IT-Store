@@ -1,7 +1,7 @@
 <%@ include file="/utility/dbcontext.jsp" %>
 <%@ include file="/utility/helper.jsp" %>
 <%
-int _userRole = session.getAttribute("BJ_USERROLE") == null ? 3 : (Integer)session.getAttribute("BJ_USERROLE");
+Integer _userRole = session.getAttribute("BJ_USERROLE") == null ? 3 : (Integer)session.getAttribute("BJ_USERROLE");
 if (_userRole != 2){
 	response.sendRedirect(application.getContextPath() + "/index.jsp");
 	return;
