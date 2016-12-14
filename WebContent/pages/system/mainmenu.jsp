@@ -67,7 +67,7 @@
 			out.print("<p class='text-right' style='margin-top: 70px; margin-right: 20px; margin-bottom: 3px;'>Hello, Guys</p>");
 			out.print("<p class='text-right' style='margin-right: 20px;'>" + sdf.format(dt) + "</p>");
 		}else{
-			int onlineUser = (Integer)application.getAttribute("appBJ_USERONLINE");
+			Integer onlineUser = (Integer)application.getAttribute("appBJ_USERONLINE");
 			String firstName = "";
 			if (userFullName.indexOf(' ') == -1) firstName = userFullName;
 			else{

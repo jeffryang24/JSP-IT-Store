@@ -6,7 +6,7 @@ if (_userID == null){
 }
 
 //get current user role
-int _userRole = session.getAttribute("BJ_USERROLE") == null ? 3 : (Integer)session.getAttribute("BJ_USERROLE");
+Integer _userRole = session.getAttribute("BJ_USERROLE") == null ? 3 : (Integer)session.getAttribute("BJ_USERROLE");
 
 //parameter uid hanya boleh digunakan oleh admin...
 //jika ada akses diluar admin, maka akan diarahkan ke halaman index

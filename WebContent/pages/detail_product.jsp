@@ -1,7 +1,7 @@
 <%-- Header --%>
 <%
 String _pID = (String)request.getParameter("pid");
-if (_pID == null){
+if (_pID == null || _pID.trim().equalsIgnoreCase("")){
 	response.sendRedirect(application.getContextPath() + "/index.jsp");
 	return;
 }
@@ -47,15 +47,38 @@ img
 			<p><%= rs.getString("BJ_productDesc") %></p>
 			<%
 			if (_userRole == 2){
+				if (rs.getInt("BJ_productStock") > 0){	// start of stock checking
 			%>
 			<form class="form-inline text-center" method="post" action="system/doCart.jsp">
 				<div class="form-group">
 					<label class="sr-only" for="inQty">Quantity</label>
 					<input type="text" class="form-control" id="inQty" name="inQty" placeholder="Quantity">
+					<input type="hidden" name="pid" value="<%= _pID %>">
 				</div>
 				<button type="submit" class="btn btn-primary">Add to Cart</button>
 			</form>
+				<%
+				String errorProd = (String)request.getParameter("eProd");
+				String msgProd = (String)request.getParameter("msgProd");
+				if (errorProd != null){
+				%>
+			<div class="alert alert-danger" role="alert"><%= errorProd %></div>
+				<%
+				}
+				%>
+				<%
+				if (msgProd != null){
+				%>
+			<div class="alert alert-success" role="alert"><%= msgProd %></div>
+				<%
+				}
+				%>
 			<%
+				}else{	// else of stock checking
+			%>
+				<p class="text-center bg-danger">Empty Stock</p>
+			<%
+				}	// end of stock checking
 			}
 			%>
 		</div>
