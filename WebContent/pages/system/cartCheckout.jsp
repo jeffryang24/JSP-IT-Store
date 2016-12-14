@@ -10,7 +10,7 @@ if (uid == null || uid.trim().equalsIgnoreCase("")){
 	/* insert into TransactionHeader */
 	
 	// check if current transaction table is empty or not
-	String sql = "select BJ_transID from BJ_TransactionHeader order by BJ_transID";
+	String sql = "select BJ_transID from BJ_TransactionHeader order by BJ_transID DESC";
 	ResultSet rsCart = stmt.executeQuery(sql);
 	
 	if (!rsCart.isBeforeFirst()){
@@ -48,7 +48,7 @@ if (uid == null || uid.trim().equalsIgnoreCase("")){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
 		// set to pending
-		sql = "insert into BJ_TransactionHeader values (1, '" + sdf.format(dt) + "', '" + uid + "', 1)";
+		sql = "insert into BJ_TransactionHeader values (" + newID + ", '" + sdf.format(dt) + "', '" + uid + "', 1)";
 		stmt.executeUpdate(sql);
 		
 		// now insert cart to TransactionDetail
