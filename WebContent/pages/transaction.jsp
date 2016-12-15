@@ -29,7 +29,7 @@ ResultSet rsTrans = null;
 		<%
 		// for user/member
 		if (_userRole == 2){
-			sql = "select BJ_transID as ID, BJ_transDate as DT, BJ_transStatusID as STATUS_ID from BJ_TransactionHeader where BJ_transUserID = '" + _userID + "'";
+			sql = "select BJ_transID as ID, BJ_transDate as DT, BJ_transStatusID as STATUS_ID from BJ_TransactionHeader where BJ_transUserID = '" + _userID + "' order by BJ_transID";
 			rsTrans = stmt.executeQuery(sql);
 			
 			if (!rsTrans.isBeforeFirst()){	// if data kosong
@@ -80,7 +80,7 @@ ResultSet rsTrans = null;
 			}	// else data tidak kosong
 		}else if (_userRole == 1){	// else for admin.
 			sql = "select a.BJ_transID as ID, a.BJ_transDate as DT, a.BJ_transStatusID as STATUS_ID, b.BJ_userName as USERNAME from BJ_TransactionHeader a " +
-					"join BJ_User b on a.BJ_transUserID = b.BJ_userID";
+					"join BJ_User b on a.BJ_transUserID = b.BJ_userID order by a.BJ_transID";
 			rsTrans = stmt.executeQuery(sql);
 				
 			if (!rsTrans.isBeforeFirst()){	// jika data kosong
