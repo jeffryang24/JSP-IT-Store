@@ -74,7 +74,7 @@ String memberSearch = (String)request.getParameter("txtSearch");
 						// then admin can only delete account
 						if (rsMember.getString("Role").equalsIgnoreCase("Admin")){
 						%>
-							<a href="#" onclick="redirectTo('<%= application.getContextPath() + "/pages/system/admDeleteMember.jsp?uid=" + rsMember.getString("UID") %>')" class="btn btn-danger" role="button">Delete</a>
+							<a href="#" onclick="redirectTo('<%= application.getContextPath() + "/pages/system/admDeleteMember.jsp?uid=" + rsMember.getString("UID") %>','Are you sure want to delete this user?')" class="btn btn-danger" role="button">Delete</a>
 						<%
 						}else{	// else admin can change non-admin role
 						%>
